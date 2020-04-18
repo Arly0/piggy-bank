@@ -1,0 +1,33 @@
+.centerBlock div{
+  justify-content: center;
+}
+.centerBlock label{
+  margin: 10px 5px;
+}
+.reg__sbm{
+  padding: 7px 15px;
+  background-color: lightblue;
+  border: none;
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  transition: .4s;
+}
+.reg__sbm:hover{
+  cursor: pointer;
+  background-color: #9794e6;
+}
+.errorMsg_block{
+  width: 100%;
+  text-align: center;
+}
+.errorMsg_text{
+  margin: 15px auto;
+  text-align: center;
+  font-weight: normal;
+  font-size: 14px;
+  padding: 5px 20px;
+  background-color: darkred;
+  color: #fff;
+  width: 300px;
+}

@@ -1,8 +1,16 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './styles/App.css';
 import Auth from "./components/auth";
+import Reg from './components/reg'
 import { render } from '@testing-library/react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
 
 class App extends React.Component {
   constructor () {
@@ -12,21 +20,10 @@ class App extends React.Component {
     };
   };
 
-  // form auth data: auth_login & auth_pass
-  sendAuth = (event) => {
-    e.preventDefault();
-
-    let login = event.target.elements.auth_login.value,
-      password = event.target.elements.auth_pass.value
-
-
-      // send API to backend & take response
-  }
-
   render() {
     return (
       <div className="App">
-        <header className="App-header">
+        {/* <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
             Edit <code>src/App.js</code> and save to reload. 1223
@@ -39,9 +36,17 @@ class App extends React.Component {
           >
             Learn React
           </a>
-        </header>
-  
-        <Auth />
+        </header> */}
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Auth />
+            </Route>
+            <Route exact path="/registration">
+              <Reg />
+            </Route>
+          </Switch>
+        </Router>
       </div>
     );
   };
