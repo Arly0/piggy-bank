@@ -1,5 +1,6 @@
 import React from "react";
 import '../styles/reg.css'
+import axios from 'axios';
 class Reg extends React.Component {
   constructor(){  
     super();  
@@ -9,7 +10,7 @@ class Reg extends React.Component {
 }    
 
   // form reg user: reg_email & reg_login & reg_pass & reg_rpass & reg_name * reg_sname
-  regUser = (event) => {
+  regHandle = (event) => {
     event.preventDefault();
     
     let email = event.target.elements.reg_email.value,
@@ -45,6 +46,25 @@ class Reg extends React.Component {
       if (errorFlag) {
         return 0;
       }
+
+      let tempJSON = JSON.stringify(
+        {
+            login: login,
+            password: pass,
+            email: email,
+            name: name,
+            surname: sname
+        }
+    );
+
+      let responce = axios.post(`http://arly0.beget.tech/user/register`, tempJSON);
+
+      if (responce.status) {
+        // msg: success 
+        // TODO print success message
+      } else {
+        
+      }
   }
 
   render () {
@@ -55,7 +75,7 @@ class Reg extends React.Component {
             return  <h3 className="errorMsg_text">{value}</h3>
           })}
         </div>
-        <form className="centerBlock" onSubmit={this.regUser}>
+        <form className="centerBlock" onSubmit={this.regHandle}>
           <div className="d-flex reg__mail_block">
             <label className="reg_label reg_email">
               <p>

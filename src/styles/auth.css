@@ -1,0 +1,11 @@
+.error_block{
+  background-color: rgb(255, 140, 140);
+  padding: 11px 15px;
+  max-width: 300px;
+  margin: auto;
+}
+.error_msg{
+  color: #000;
+  text-transform: uppercase;
+  text-align: center;
+}

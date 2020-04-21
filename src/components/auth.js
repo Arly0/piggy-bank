@@ -7,6 +7,7 @@ import {
   } from "react-router-dom";
 import { render } from '@testing-library/react';
 import axios from 'axios';
+import './../styles/auth.css';
 
 class Auth extends React.Component {
     constructor(){  
@@ -17,7 +18,7 @@ class Auth extends React.Component {
     }  
     
     // form auth data: auth_login & auth_pass
-  sendAuth = (event) => {
+  submitHandle = (event) => {
     event.preventDefault();
 
     let login = event.target.elements.auth_login.value,
@@ -30,22 +31,38 @@ class Auth extends React.Component {
             }
         );
       // send API to backend & take response
-      let responce = JSON.parse(axios.post(`http://arly0.beget.tech/user`,tempJSON));
-
-      if (!responce.status) {
-        this.setState({
-            error: responce.message,
-          });
-      } else {
-          
-      }
+      axios.post(`http://arly0.beget.tech/user/login`, tempJSON)
+      .then( (responce) => {
+          if (responce.data.status === false) {
+            this.setState({
+                error: responce.data.message,
+            });
+          } else {
+            // set token
+            localStorage.setItem('token', responce.data.data.token);
+          }
+      })
+      .catch( (error) => {
+          console.log(error);
+          this.setState({
+            error: "Unknown error",
+        });
+      });
   }
 
     render() {
         return (
             // html code
             <div className="comp__auth">
-                <form onSubmit={this.sendAuth} className="form form__auth">
+
+                { this.state.error != '' &&
+                    <div className="error_block">
+                        <p className="error_msg">{this.state.error}</p>
+                    </div>
+                }
+                
+
+                <form onSubmit={this.submitHandle} className="form form__auth">
     
                     <label>
                         <p className="auth__login_text">Enter your login</p>   
