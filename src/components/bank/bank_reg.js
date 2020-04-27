@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import history from './../history'
 // styles
 import './../../styles/bank_reg.css';
 
@@ -7,26 +8,9 @@ class RegisterBank extends React.Component {
   constructor () {
     super();
     this.state = {
-      conditionList: [''],
+      errorMsg: '',
     };
   };
-
-  newConditionHandler = (event) => {
-    let fullList = this.state.conditionList;
-    this.setState({
-      conditionList: [...fullList, ''],
-    });
-  }
-
-  deleteConditionHandler(event, index) {
-      let temp = this.state.conditionList;
-      console.log(temp);
-      temp.splice(index, 1);
-
-      this.setState({
-       conditionList: temp, 
-      });
-  }
 
   submitHandler = (event) => {
     event.preventDefault();
@@ -34,31 +18,30 @@ class RegisterBank extends React.Component {
     let moneybox_name = event.target.elements.moneybox_name.value,
       moneybox_target = event.target.elements.moneybox_target.value,
       moneybox_comment = event.target.elements.moneybox_comment.value,
-      moneybox_condition = [];
+      moneybox_amount = event.target.elements.moneybox_amount.value;
 
-      // event.target.elements.moneybox_condition.forEach((item, index) => {
-        // moneybox_condition[index] = item.value;
-      // });
-
-      // TODO: moneybox_condition[0] сменить на передачу масива когда на беке переделают
-      axios.post('http://arly0.beget.tech/moneybox', 
-      {},
-      {
-        headers: {
-          "VITYAPOCHEMUNESKAZALHEADER": localStorage.getItem('token')
-        },
-        data: {
+      let tempJSON = JSON.stringify(
+        {
           moneybox_name: moneybox_name,
           target: moneybox_target,
           comment: moneybox_comment,
-          task: 'Vitya xyi ;D'
+          amount: moneybox_amount
+        }
+      );
+
+      axios.post('http://arly0.beget.tech/moneybox/create', tempJSON, {
+        headers: {
+          "PIGGY-BANK-TOKEN": localStorage.getItem('token')
         }
       })
       .then( (responce) => {
-          console.log('success');
+        history.push("/main");
       })
       .catch( (error) => {
-        console.log('error');
+        this.setState({errorMsg: "Unknown error. Try again later!"});
+        alert(this.state.errorMsg);
+        // for debug
+        console.log(error);
       });
   }
 
@@ -68,6 +51,8 @@ class RegisterBank extends React.Component {
         <h2 className="bank__register">
           Create new piggy-bank
         </h2>
+
+
 
         <form onSubmit={this.submitHandler}>
           <hr></hr>
@@ -82,12 +67,17 @@ class RegisterBank extends React.Component {
             <input type="text" className="reg_bank__field" name="moneybox_target" required maxLength="200" />
           </label>
 
-          <label className="reg_bank__label reg_bank_comment">
-            <p className="reg_bank__text">Enter comment</p>
-            <input type="text" className="reg_bank__field" name="moneybox_comment" required minLength="2" maxLength="50"  />
+          <label className="reg_bank__label reg_bank_amount">
+            <p className="reg_bank__text">Enter amount (amount to be collected)</p>
+            <input type="text" className="reg_bank__field" name="moneybox_amount" required />
           </label>
 
-          <label className="reg_bank__label reg_bank_condition">
+          <label className="reg_bank__label reg_bank_comment">
+            <p className="reg_bank__text">Enter comment</p>
+            <input type="text" className="reg_bank__field" name="moneybox_comment" minLength="2" maxLength="50"  />
+          </label>
+
+          {/* <label className="reg_bank__label reg_bank_condition">
             <p className="reg_bank__text"><span className="required_symbol">*</span>Enter conditions</p>
 
             {this.state.conditionList.map((value, index) => {
@@ -99,7 +89,7 @@ class RegisterBank extends React.Component {
               );
             })}
           </label>
-          <button type="button" onClick={this.newConditionHandler}>New condition</button>
+          <button type="button" onClick={this.newConditionHandler}>New condition</button> */}
 
           <br /> <br />
           <button className="register_biggy_bank" type="submit">Register</button>

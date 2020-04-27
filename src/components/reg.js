@@ -1,6 +1,7 @@
 import React from "react";
 import '../styles/reg.css'
 import axios from 'axios';
+import history from './history'
 class Reg extends React.Component {
   constructor(){  
     super();  
@@ -55,13 +56,14 @@ class Reg extends React.Component {
             name: name,
             surname: sname
         }
-    );
+      );
 
       let responce = axios.post(`http://arly0.beget.tech/user/register`, tempJSON);
 
       if (responce.status) {
         // msg: success 
         // TODO print success message
+        history.push('/');
       } else {
         
       }
