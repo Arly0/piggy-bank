@@ -52,8 +52,6 @@ class RegisterBank extends React.Component {
           Create new piggy-bank
         </h2>
 
-
-
         <form onSubmit={this.submitHandler}>
           <hr></hr>
 
@@ -68,7 +66,7 @@ class RegisterBank extends React.Component {
           </label>
 
           <label className="reg_bank__label reg_bank_amount">
-            <p className="reg_bank__text">Enter amount (amount to be collected)</p>
+            <p className="reg_bank__text"><span className="required_symbol">*</span>Enter amount (amount to be collected)</p>
             <input type="text" className="reg_bank__field" name="moneybox_amount" required />
           </label>
 
@@ -94,6 +92,7 @@ class RegisterBank extends React.Component {
           <br /> <br />
           <button className="register_biggy_bank" type="submit">Register</button>
         </form>
+
       </div>
     );
   }

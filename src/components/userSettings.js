@@ -21,12 +21,19 @@ class Settings extends React.Component {
     if (pass === repeatPass) {
       this.setState({error: ''});
       // success -> send request
-      axios.post('http://arly0.beget.tech/user/update')
+      axios.post('http://arly0.beget.tech/user/update', {
+        headers: {
+          "PIGGY-BANK-TOKEN": localStorage.getItem('token')
+        }
+      })
       .then((responce) => {
-
+          // success info 
       })
       .catch((error) => {
-
+        console.log(error);
+        this.setState({
+          error: "Unknown error. Try again later!"
+        })
       });
     } else {
       this.setState({error: 'Password and repeat password missmatch!'});

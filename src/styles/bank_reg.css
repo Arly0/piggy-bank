@@ -6,3 +6,72 @@
 .reg_bank_condition div {
   justify-content: center;
 }
+
+/* modal win */
+.relative__window{
+  position: relative;
+}
+.darkSide{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,.2);
+}
+.modal{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background-color: #fff;
+  width: max-content;
+  height: max-content;
+  margin: auto;
+  padding: 20px 35px;
+}
+.modal__title{
+  font-size: 24px;
+  font-weight: 900;
+  text-align: center;
+  width: 100%;
+  margin: 15px 0;
+}
+.edit__paragraph{
+  margin-bottom: 7px;
+  padding: 0 5px;
+  width: 100%;
+}
+.edit__text{
+  font-size: 18px;
+  margin-bottom: 1rem;
+  font-weight: 300;
+  text-align: left;
+}
+.edit__field{
+  width: 250px;
+  border: 1px solid #444;
+  padding: 4px 0 4px 10px;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: 300;
+}
+textarea.edit__field{
+  resize: vertical;
+  max-height: 200px;
+}
+.edit__submit{
+  padding: 10px 7px;
+  background-color: tomato;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  margin: 15px 0;
+  min-width: 100px;
+  transition: all .2s ease;
+}
+.edit__submit:hover{
+  background-color: #e75a41;
+  cursor: pointer;
+}

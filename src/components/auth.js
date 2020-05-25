@@ -8,6 +8,7 @@ import {
 import { render } from '@testing-library/react';
 import axios from 'axios';
 import './../styles/auth.css';
+import history from './history'
 
 class Auth extends React.Component {
     constructor(){  
@@ -40,6 +41,8 @@ class Auth extends React.Component {
           } else {
             // set token
             localStorage.setItem('token', responce.data.data.token);
+            // history.push('/main');
+            window.location.reload();
           }
       })
       .catch( (error) => {

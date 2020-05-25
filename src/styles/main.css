@@ -1,0 +1,29 @@
+/* main table */
+.pb__table, .pb__table tr, .pb__table td, .pb__table th {
+  border: 1px solid black;
+  margin: 0px;
+}
+.main{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.header__list{
+  list-style-type: none;
+  display: flex;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+}
+.header__item{
+  max-width: 200px;
+  padding: 10px 15px;
+  margin-right: 20px;
+}
+.table__edit_icon{
+  width: 15px;
+  height: auto;
+}
+.table__edit_icon:hover{
+  cursor: pointer;
+}
