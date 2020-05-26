@@ -27,7 +27,7 @@ class Main extends React.Component {
     this.showModalHandler = this.showModalHandler.bind(this);
   }
 
-  componentDidMount () {
+  parseDataHandler = (event) => {
     // take from DB info about all piggy-banks
     axios.get('http://arly0.beget.tech/moneybox/getinfo', {
       headers: {
@@ -49,6 +49,10 @@ class Main extends React.Component {
       console.log(error);
       this.setState({errorMsg: 'Unknown error!'});
     })
+  };
+
+  componentDidMount () {
+    this.parseDataHandler();
   }
 
   showModalHandler = (event, index) => {
@@ -71,6 +75,7 @@ class Main extends React.Component {
       }
     }
     this.setState({data: tempData});
+    this.parseDataHandler();
   }
   
   render () {
@@ -124,7 +129,6 @@ class Main extends React.Component {
                 </thead>
                 <tbody>
                   {/* cycle */}
-
                   {table}
                 </tbody>
               </table>

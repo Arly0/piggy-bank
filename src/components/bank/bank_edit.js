@@ -29,9 +29,21 @@ class EditBank extends React.Component {
       }
     );
     // axios sned update info
-    axios.post('http://arly0.beget.tech/moneybox/update?id=' + this.props.id)
+    axios.post('http://arly0.beget.tech/moneybox/update?id=' + this.props.id, tempJSON, {
+      headers: {
+        "PIGGY-BANK-TOKEN": localStorage.getItem('token')
+      }
+    })
     .then( (responce) => {
-        // success -> TODO: close modal and load update data
+        if (responce.data.status === 200) {
+          // success
+          alert('u win');
+        } else {
+          // error
+          this.setState({
+            error: "Can`t update data. Try again later."
+          });
+        }
     })
     .catch( (error) => {
       console.log(error);
@@ -39,6 +51,7 @@ class EditBank extends React.Component {
         error: "Unknown error. Try again later!"
       });
     });
+    this.closeModalHandler();
   }
 
   closeModalHandler = (event) => {
